@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/CreateTodoBtn.css'
+import './CreateTodoBtn.css'
 
 function CreateTodoBtn() {
   return(

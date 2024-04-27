@@ -1,4 +1,5 @@
-import '../styles/TodoCounter.css';
+import React from 'react';
+import './TodoCounter.css';
 
 function TodoCounter({ total, completed }) {
   const toDoCount = <h1 className="TodoCounter">
