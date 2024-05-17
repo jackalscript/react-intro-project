@@ -1,35 +1,32 @@
 import React from "react";
-import { TodoCounter } from '../components/TodoCounter/index';
-import { TodoSearch } from '../components/TodoSearch/index';
-import { TodoList } from '../components/TodoList/index';
-import { TodoItem } from '../components/TodoItem/index';
-import { CreateTodoBtn } from '../components/CreateTodoButton/index';
-import { TodosLoading } from "../components/TodosLoading";
-import { TodosError } from "../components/TodosError"
-import { EmptyTodos } from "../components/EmptyTodos"
+import { TodoCounter } from '../components/TodoCounter';
+import { TodoSearch } from '../components/TodoSearch';
+import { TodoList } from '../components/TodoList';
+import { TodoItem } from '../components/TodoItem';
+import { CreateTodoBtn } from '../components/CreateTodoButton';
+import { TodoForm } from "../components/TodoForm";
+import { TodosLoading } from '../components/TodosLoading';
+import { TodosError } from '../components/TodosError';
+import { EmptyTodos } from '../components/EmptyTodos';
+import { TodoContext } from '../components/TodoContext';
+import { Modal } from '../components/Modal';
 
-function AppUI ({
-  loading,
-  error,
-  completedTodos,
-  totalTodos,
-  searchValue,
-  setSearchValue,
-  searchedTodos,
-  finishTodo,
-  deleteTodo,
-}) {
+function AppUI () {
+  const {
+      loading,
+      error,
+      searchedTodos,
+      finishTodo,
+      deleteTodo,
+      openModal,
+      setOpenModal,
+  } = React.useContext(TodoContext);
+
   return (
     <React.Fragment>
   
-      <TodoCounter
-        completed={completedTodos}
-        total={totalTodos}
-      />
-      <TodoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      <TodoCounter />
+      <TodoSearch />
 
       <TodoList>
         {loading && (
@@ -53,8 +50,15 @@ function AppUI ({
           />
         ))}
       </TodoList>
-  
-      <CreateTodoBtn />
+        
+      <CreateTodoBtn setOpenModal={setOpenModal} />
+
+      {openModal && (
+        <Modal>
+          <TodoForm />
+        </Modal>
+      )}
+
     </React.Fragment>
   );
 }
